@@ -17,14 +17,15 @@
       --turq-400: #2dd4bf;
       --cyan-500: #06b6d4;
       --turq-deep: #0f766e;
+      --wa: #25d366;
+      --wa-dark: #1ebe5b;
 
       --white: #ffffff;
-      --ink: #0f2b2a;        /* texto principal (oscuro) */
-      --ink-soft: #3f5c5a;   /* texto secundario */
-      --ink-dim: #6b8785;    /* texto tenue */
+      --ink: #0f2b2a;
+      --ink-soft: #3f5c5a;
+      --ink-dim: #6b8785;
       --mint: #ecfdfa;
 
-      /* Glass sobre fondo CLARO: panel blanco translúcido, borde blanco brillante */
       --glass-bg: rgba(255, 255, 255, 0.55);
       --glass-bg-strong: rgba(255, 255, 255, 0.72);
       --glass-border: rgba(255, 255, 255, 0.85);
@@ -41,7 +42,6 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Base clara sólida: garantiza que nunca haya un hueco sin color detrás del glass */
     html { scroll-behavior: smooth; background: #eafcf8; }
 
     body {
@@ -51,7 +51,6 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-      /* Fondo claro con brillos turquesa (sin fixed, para que no falle en móvil) */
       background:
         radial-gradient(1200px 600px at 12% -5%, rgba(45,212,191,0.35) 0%, transparent 55%),
         radial-gradient(900px 500px at 100% 6%, rgba(6,182,212,0.28) 0%, transparent 52%),
@@ -60,151 +59,100 @@
         linear-gradient(165deg, #f2fffc 0%, #e6fbf6 40%, #f4fffe 70%, #eafcf8 100%);
     }
 
-    /* Orbes turquesa desenfocados: dan el "fondo vibrante" que necesita el glass */
     .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.5;
-      z-index: 0;
-      pointer-events: none;
-      animation: float 18s ease-in-out infinite;
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5;
+      z-index: 0; pointer-events: none; animation: float 18s ease-in-out infinite;
     }
     .orb.o1 { width: 480px; height: 480px; top: -120px; left: -80px; background: #2dd4bf; }
     .orb.o2 { width: 420px; height: 420px; top: 42%; right: -140px; background: #06b6d4; opacity: 0.32; animation-delay: -6s; }
     .orb.o3 { width: 520px; height: 520px; top: 72%; left: 20%; background: #5eead4; animation-delay: -11s; }
 
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, -40px) scale(1.08); }
-    }
+    @keyframes float { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-40px) scale(1.08); } }
 
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
 
-    /* ---------- Utilidad Glass ---------- */
+    /* ---------- Glass ---------- */
     .glass {
       background: var(--glass-bg);
-      -webkit-backdrop-filter: blur(var(--blur));
-      backdrop-filter: blur(var(--blur));
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      border-radius: var(--radius);
+      -webkit-backdrop-filter: blur(var(--blur)); backdrop-filter: blur(var(--blur));
+      border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: var(--radius);
     }
 
     /* ---------- Navbar ---------- */
-    header.nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 14px 0;
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 22px;
-      border-radius: 18px;
-    }
+    header.nav { position: sticky; top: 0; z-index: 50; padding: 14px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 22px; border-radius: 18px; }
     .brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.3px; color: var(--ink); }
-    .brand .logo {
-      width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center;
-      background: linear-gradient(135deg, var(--turq-400), var(--cyan-500));
-      box-shadow: 0 4px 14px rgba(20,184,166,0.4);
-    }
+    .brand .logo { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: linear-gradient(135deg, var(--turq-400), var(--cyan-500)); box-shadow: 0 4px 14px rgba(20,184,166,0.4); }
     .brand .logo svg { width: 22px; height: 22px; }
     .brand small { display: block; font-family: var(--font-body); font-weight: 400; font-size: 0.68rem; color: var(--ink-dim); letter-spacing: 2px; text-transform: uppercase; }
-    nav.links { display: flex; gap: 26px; align-items: center; }
+    nav.links { display: flex; gap: 26px; align-items: center; margin-left: auto; }
     nav.links a { color: var(--ink-soft); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
     nav.links a:hover { color: var(--turq-600); }
-    .btn {
-      display: inline-block; font-family: var(--font-head); font-weight: 600; font-size: 0.92rem;
-      padding: 11px 22px; border-radius: 12px; text-decoration: none; cursor: pointer; border: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-primary {
-      color: #fff; background: linear-gradient(135deg, var(--turq-500), var(--cyan-500));
-      box-shadow: 0 6px 20px rgba(20,184,166,0.4);
-    }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: var(--font-head); font-weight: 600; font-size: 0.92rem; padding: 11px 22px; border-radius: 12px; text-decoration: none; cursor: pointer; border: none; transition: transform 0.2s, box-shadow 0.2s, background 0.2s; }
+    .btn svg { width: 18px; height: 18px; }
+    .btn-primary { color: #fff; background: linear-gradient(135deg, var(--turq-500), var(--cyan-500)); box-shadow: 0 6px 20px rgba(20,184,166,0.4); }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(20,184,166,0.5); }
     .btn-ghost { color: var(--turq-deep); background: var(--glass-bg-strong); border: 1px solid var(--glass-border); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
     .btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,0.9); }
+    .btn-wa { color: #fff; background: linear-gradient(135deg, var(--wa), var(--wa-dark)); box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+    .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,0.55); }
+    .btn-wa svg { fill: #fff; width: 19px; height: 19px; }
+
+    /* Language toggle */
+    .lang-toggle {
+      display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-head); font-weight: 600; font-size: 0.82rem;
+      padding: 9px 14px; border-radius: 11px; cursor: pointer; color: var(--turq-deep);
+      background: var(--glass-bg-strong); border: 1px solid rgba(20,184,166,0.35);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: transform 0.2s, background 0.2s;
+    }
+    .lang-toggle:hover { transform: translateY(-2px); background: #fff; }
+    .lang-toggle svg { width: 15px; height: 15px; stroke: var(--turq-600); }
 
     /* ---------- Hero ---------- */
     .hero { padding: 70px 0 40px; }
     .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--turq-600);
-      padding: 7px 14px; border-radius: 999px; margin-bottom: 22px;
-      background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.3);
-    }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--turq-600); padding: 7px 14px; border-radius: 999px; margin-bottom: 22px; background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.3); }
     .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--turq-500); box-shadow: 0 0 10px var(--turq-400); }
-    .hero h1 {
-      font-family: var(--font-head); font-weight: 800; font-size: clamp(2.4rem, 5.5vw, 4rem);
-      line-height: 1.05; letter-spacing: -1px; margin-bottom: 20px; color: var(--ink);
-    }
+    .hero h1 { font-family: var(--font-head); font-weight: 800; font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.05; letter-spacing: -1px; margin-bottom: 20px; color: var(--ink); }
     .hero h1 .accent { white-space: nowrap; background: linear-gradient(120deg, var(--turq-500), var(--cyan-500)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     .hero p.lead { font-size: 1.12rem; color: var(--ink-soft); max-width: 520px; margin-bottom: 32px; font-weight: 400; }
     .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
 
-    /* Tarjeta de producto (glass) */
     .product-card { padding: 32px; position: relative; overflow: hidden; }
-    .product-card::before {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(45,212,191,0.18), rgba(6,182,212,0.10));
-      z-index: -1;
-    }
+    .product-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(45,212,191,0.18), rgba(6,182,212,0.10)); z-index: -1; }
     .pc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
-    .pc-vial {
-      width: 62px; height: 62px; border-radius: 16px; display: grid; place-items: center;
-      background: linear-gradient(160deg, var(--turq-400), var(--cyan-500));
-      box-shadow: 0 6px 18px rgba(20,184,166,0.35);
-    }
+    .pc-vial { width: 62px; height: 62px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(160deg, var(--turq-400), var(--cyan-500)); box-shadow: 0 6px 18px rgba(20,184,166,0.35); }
     .pc-vial svg { width: 30px; height: 30px; }
     .pc-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--turq-deep); padding: 6px 12px; border-radius: 8px; background: rgba(20,184,166,0.15); border: 1px solid rgba(20,184,166,0.35); }
     .product-card h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.55rem; margin-bottom: 4px; color: var(--ink); }
     .product-card .sub { color: var(--ink-dim); font-size: 0.92rem; margin-bottom: 20px; }
     .product-card .desc { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 24px; }
     .specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .spec {
-      text-align: center; padding: 14px 8px; border-radius: var(--radius-sm);
-      background: rgba(255,255,255,0.6); border: 1px solid rgba(20,184,166,0.18);
-    }
+    .spec { text-align: center; padding: 14px 8px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.6); border: 1px solid rgba(20,184,166,0.18); }
     .spec .num { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; color: var(--turq-deep); }
     .spec .lbl { font-size: 0.68rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
-    .ruo-badge {
-      margin-top: 18px; text-align: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--ink-dim); padding: 8px; border-radius: 10px;
-      border: 1px dashed rgba(15,118,110,0.35);
-    }
+    .ruo-badge { margin-top: 18px; text-align: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-dim); padding: 8px; border-radius: 10px; border: 1px dashed rgba(15,118,110,0.35); }
 
-    /* ---------- Section base ---------- */
+    /* ---------- Sections ---------- */
     section { padding: 70px 0; }
     .section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
     .section-head .eyebrow { margin-bottom: 16px; }
     .section-head h2 { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.9rem, 4vw, 2.7rem); letter-spacing: -0.5px; margin-bottom: 12px; color: var(--ink); }
     .section-head p { color: var(--ink-soft); font-size: 1.05rem; }
 
-    /* ---------- Beneficios ---------- */
     .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
     .benefit { padding: 28px 24px; transition: transform 0.25s, background 0.25s; }
     .benefit:hover { transform: translateY(-6px); background: var(--glass-bg-strong); }
-    .benefit .icon {
-      width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 18px;
-      background: linear-gradient(135deg, var(--turq-400), var(--cyan-500));
-      box-shadow: 0 6px 16px rgba(20,184,166,0.28);
-    }
+    .benefit .icon { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 18px; background: linear-gradient(135deg, var(--turq-400), var(--cyan-500)); box-shadow: 0 6px 16px rgba(20,184,166,0.28); }
     .benefit .icon svg { width: 28px; height: 28px; stroke: #fff; }
     .benefit h4 { font-family: var(--font-head); font-weight: 600; font-size: 1.12rem; margin-bottom: 8px; color: var(--ink); }
     .benefit p { color: var(--ink-soft); font-size: 0.9rem; }
 
-    /* ---------- Protocolo (tabla glass) ---------- */
     .table-glass { padding: 12px; overflow: hidden; }
     table { width: 100%; border-collapse: collapse; }
-    thead th {
-      font-family: var(--font-head); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-      color: var(--turq-600); text-align: left; padding: 20px 22px;
-    }
+    thead th { font-family: var(--font-head); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--turq-600); text-align: left; padding: 20px 22px; }
     tbody td { padding: 20px 22px; font-size: 0.98rem; color: var(--ink-soft); border-top: 1px solid rgba(15,118,110,0.14); }
     tbody tr { transition: background 0.2s; }
     tbody tr:hover { background: rgba(20,184,166,0.06); }
@@ -212,40 +160,37 @@
     td.dose .pill { display: inline-block; padding: 4px 12px; border-radius: 999px; background: linear-gradient(135deg, var(--turq-500), var(--cyan-500)); color: #fff; box-shadow: 0 4px 12px rgba(20,184,166,0.35); }
     .table-note { text-align: center; color: var(--ink-dim); font-size: 0.85rem; margin-top: 22px; }
 
-    /* ---------- Confianza ---------- */
     .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .trust-box { padding: 34px 28px; text-align: center; transition: transform 0.25s; }
     .trust-box:hover { transform: translateY(-8px); }
-    .trust-box .t-icon {
-      width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 20px;
-      background: linear-gradient(135deg, rgba(45,212,191,0.22), rgba(6,182,212,0.14));
-      border: 1px solid rgba(20,184,166,0.3);
-    }
+    .trust-box .t-icon { width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 20px; background: linear-gradient(135deg, rgba(45,212,191,0.22), rgba(6,182,212,0.14)); border: 1px solid rgba(20,184,166,0.3); }
     .trust-box .t-icon svg { width: 30px; height: 30px; stroke: var(--turq-600); }
     .trust-box h4 { font-family: var(--font-head); font-weight: 600; font-size: 1.2rem; margin-bottom: 10px; color: var(--ink); }
     .trust-box p { color: var(--ink-soft); font-size: 0.92rem; }
 
-    /* ---------- CTA final ---------- */
     .cta-band { padding: 54px 40px; text-align: center; }
     .cta-band h2 { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 14px; color: var(--ink); }
     .cta-band p { color: var(--ink-soft); margin-bottom: 28px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .cta-band .hero-cta { justify-content: center; }
+
+    /* ---------- Floating WhatsApp ---------- */
+    .wa-float { position: fixed; right: 22px; bottom: 22px; width: 58px; height: 58px; border-radius: 50%; background: var(--wa); display: grid; place-items: center; box-shadow: 0 8px 24px rgba(37,211,102,0.5); z-index: 60; transition: transform 0.2s; animation: wapulse 2.6s ease-in-out infinite; }
+    .wa-float:hover { transform: scale(1.09); }
+    .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+    @keyframes wapulse { 0%,100% { box-shadow: 0 8px 24px rgba(37,211,102,0.5); } 50% { box-shadow: 0 8px 30px rgba(37,211,102,0.85); } }
 
     /* ---------- Footer ---------- */
-    footer {
-      margin-top: 40px; padding: 40px 0 30px;
-      border-top: 1px solid rgba(15,118,110,0.14);
-      background: rgba(255,255,255,0.45);
-      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-      position: relative; z-index: 2;
-    }
+    footer { margin-top: 40px; padding: 40px 0 30px; border-top: 1px solid rgba(15,118,110,0.14); background: rgba(255,255,255,0.45); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); position: relative; z-index: 2; }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
     .footer-inner .brand { font-size: 1rem; }
-    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
     .footer-links a { color: var(--ink-dim); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
     .footer-links a:hover { color: var(--turq-600); }
+    .footer-links a.wa-inline { display: inline-flex; align-items: center; gap: 6px; color: var(--wa-dark); font-weight: 600; }
+    .footer-links a.wa-inline svg { width: 15px; height: 15px; fill: var(--wa-dark); }
     .footer-disclaimer { max-width: var(--maxw); margin: 26px auto 0; padding: 0 24px; text-align: center; color: var(--ink-dim); font-size: 0.78rem; line-height: 1.6; }
 
-    /* ---------- Responsividad ---------- */
+    /* ---------- Responsive ---------- */
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; gap: 36px; }
       .hero p.lead { margin-left: auto; margin-right: auto; }
@@ -258,6 +203,8 @@
     }
     @media (max-width: 560px) {
       .wrap { padding: 0 16px; }
+      .nav-inner { padding: 10px 14px; gap: 8px; }
+      .brand small { display: none; }
       .benefits-grid { grid-template-columns: 1fr; }
       .specs { grid-template-columns: 1fr; }
       .spec { display: flex; align-items: center; justify-content: center; gap: 10px; }
@@ -268,12 +215,12 @@
       tbody tr { border: 1px solid rgba(20,184,166,0.2); border-radius: var(--radius-sm); margin: 10px; padding: 8px 0; background: rgba(255,255,255,0.5); }
       tbody td::before { content: attr(data-label); display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--turq-600); margin-bottom: 2px; }
       .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
       .cta-band { padding: 40px 22px; }
     }
   </style>
 </head>
 <body>
-  <!-- Orbes de fondo -->
   <div class="orb o1"></div>
   <div class="orb o2"></div>
   <div class="orb o3"></div>
@@ -289,12 +236,18 @@
           <span>BioFusion<small>Research Peptides</small></span>
         </div>
         <nav class="links">
-          <a href="#producto">Producto</a>
-          <a href="#beneficios">Beneficios</a>
-          <a href="#protocolo">Protocolo</a>
-          <a href="#confianza">Confianza</a>
+          <a href="#producto" data-i18n="nav.producto">Producto</a>
+          <a href="#beneficios" data-i18n="nav.beneficios">Beneficios</a>
+          <a href="#protocolo" data-i18n="nav.protocolo">Protocolo</a>
+          <a href="#confianza" data-i18n="nav.confianza">Confianza</a>
         </nav>
-        <a href="#producto" class="btn btn-primary">Ver ficha</a>
+        <div class="nav-actions">
+          <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20a15.3 15.3 0 0 1 0-20z"/></svg>
+            <span id="langLabel">EN</span>
+          </button>
+          <a href="#producto" class="btn btn-primary" data-i18n="nav.ficha">Ver ficha</a>
+        </div>
       </div>
     </div>
   </header>
@@ -304,16 +257,19 @@
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow"><span class="dot"></span> Péptido de investigación · Grado premium</span>
-          <h1>Tirzepatide <span class="accent">CO-T2</span><br>por BioFusion</h1>
-          <p class="lead">Doble agonista GIP/GLP-1 de máxima pureza para investigación científica. Formulado, verificado y liofilizado bajo estándares de laboratorio exigentes.</p>
+          <span class="eyebrow"><span class="dot"></span> <span data-i18n="hero.eyebrow">Péptido de investigación · Grado premium</span></span>
+          <h1>Tirzepatide <span class="accent">CO-T2</span><br><span data-i18n="hero.by">por BioFusion</span></h1>
+          <p class="lead" data-i18n="hero.lead">Doble agonista GIP/GLP-1 de máxima pureza para investigación científica. Formulado, verificado y liofilizado bajo estándares de laboratorio exigentes.</p>
           <div class="hero-cta">
-            <a href="#beneficios" class="btn btn-primary">Explorar beneficios</a>
-            <a href="#protocolo" class="btn btn-ghost">Guía de protocolo</a>
+            <a href="#beneficios" class="btn btn-primary" data-i18n="hero.cta1">Explorar beneficios</a>
+            <a class="btn btn-wa wa-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.5 1.13 6.744 3.05 9.38L1.06 31.4l6.24-1.996A15.9 15.9 0 0 0 16.004 32C24.83 32 32 24.826 32 16S24.83 0 16.004 0zm9.32 22.6c-.386 1.09-1.92 1.994-3.144 2.26-.836.178-1.928.32-5.604-1.204-4.7-1.948-7.726-6.724-7.962-7.034-.226-.31-1.9-2.53-1.9-4.826 0-2.296 1.174-3.424 1.646-3.906.386-.396.836-.51 1.114-.51.278 0 .556.002.798.014.256.012.6-.098.938.716.386.926 1.31 3.222 1.424 3.456.114.234.19.51.038.82-.14.31-.21.51-.42.784-.21.274-.442.612-.632.822-.21.234-.428.486-.184.906.244.42 1.086 1.79 2.332 2.9 1.602 1.428 2.952 1.87 3.372 2.08.42.21.664.176.91-.106.246-.28 1.05-1.226 1.33-1.646.28-.42.56-.35.938-.21.386.14 2.454 1.158 2.874 1.368.42.21.7.312.804.486.106.174.106 1.006-.28 2.096z"/></svg>
+              <span data-i18n="hero.whatsapp">Escríbenos por WhatsApp</span>
+            </a>
+            <a href="#protocolo" class="btn btn-ghost" data-i18n="hero.cta2">Guía de protocolo</a>
           </div>
         </div>
 
-        <!-- Tarjeta de producto glass -->
         <div class="product-card glass">
           <div class="pc-top">
             <span class="pc-vial">
@@ -322,14 +278,14 @@
             <span class="pc-tag">CO-T2</span>
           </div>
           <h3>Tirzepatide</h3>
-          <p class="sub">Vial liofilizado · Reconstituible</p>
-          <p class="desc">Péptido de cadena única de 39 aminoácidos, sintetizado con control cromatográfico y validado por HPLC para uso exclusivo en investigación.</p>
+          <p class="sub" data-i18n="product.sub">Vial liofilizado · Reconstituible</p>
+          <p class="desc" data-i18n="product.desc">Péptido de cadena única de 39 aminoácidos, sintetizado con control cromatográfico y validado por HPLC para uso exclusivo en investigación.</p>
           <div class="specs">
-            <div class="spec"><div class="num">20 MG</div><div class="lbl">Por vial</div></div>
-            <div class="spec"><div class="num">&gt;99%</div><div class="lbl">Pureza</div></div>
-            <div class="spec"><div class="num">HPLC</div><div class="lbl">Verificado</div></div>
+            <div class="spec"><div class="num">20 MG</div><div class="lbl" data-i18n="spec.vial">Por vial</div></div>
+            <div class="spec"><div class="num">&gt;99%</div><div class="lbl" data-i18n="spec.purity">Pureza</div></div>
+            <div class="spec"><div class="num">HPLC</div><div class="lbl" data-i18n="spec.verified">Verificado</div></div>
           </div>
-          <div class="ruo-badge">⚠ For Research Use Only · No para consumo humano</div>
+          <div class="ruo-badge" data-i18n="ruo">⚠ For Research Use Only · No para consumo humano</div>
         </div>
       </div>
     </div>
@@ -339,38 +295,30 @@
   <section id="beneficios">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Perfil farmacológico</span>
-        <h2>Áreas de estudio</h2>
-        <p>Datos clínicos publicados sobre tirzepatide señalan efectos relevantes en múltiples vías metabólicas.</p>
+        <span class="eyebrow" data-i18n="benefits.eyebrow">Perfil farmacológico</span>
+        <h2 data-i18n="benefits.h2">Áreas de estudio</h2>
+        <p data-i18n="benefits.p">Datos clínicos publicados sobre tirzepatide señalan efectos relevantes en múltiples vías metabólicas.</p>
       </div>
       <div class="benefits-grid">
         <div class="benefit glass">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg>
-          </div>
-          <h4>Pérdida de peso</h4>
-          <p>Reducción significativa de masa corporal observada en estudios metabólicos controlados.</p>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg></div>
+          <h4 data-i18n="b1.h">Pérdida de peso</h4>
+          <p data-i18n="b1.p">Reducción significativa de masa corporal observada en estudios metabólicos controlados.</p>
         </div>
         <div class="benefit glass">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>
-          </div>
-          <h4>Control glucémico</h4>
-          <p>Mejora de la regulación de glucosa y sensibilidad a la insulina en modelos de estudio.</p>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></div>
+          <h4 data-i18n="b2.h">Control glucémico</h4>
+          <p data-i18n="b2.p">Mejora de la regulación de glucosa y sensibilidad a la insulina en modelos de estudio.</p>
         </div>
         <div class="benefit glass">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-          </div>
-          <h4>Salud cardiovascular</h4>
-          <p>Marcadores cardiometabólicos favorables asociados a la vía GIP/GLP-1.</p>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+          <h4 data-i18n="b3.h">Salud cardiovascular</h4>
+          <p data-i18n="b3.p">Marcadores cardiometabólicos favorables asociados a la vía GIP/GLP-1.</p>
         </div>
         <div class="benefit glass">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M8 4h8M12 4v4"/><path d="M6 9h11a3 3 0 0 1 3 3v0"/><path d="M5 9a4 4 0 0 0-1 2.6C4 16 7.6 20 12 20a7.8 7.8 0 0 0 4.7-1.5"/></svg>
-          </div>
-          <h4>Reduce el apetito</h4>
-          <p>Modulación de la saciedad y disminución de la ingesta calórica reportada en la literatura.</p>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M8 4h8M12 4v4"/><path d="M6 9h11a3 3 0 0 1 3 3v0"/><path d="M5 9a4 4 0 0 0-1 2.6C4 16 7.6 20 12 20a7.8 7.8 0 0 0 4.7-1.5"/></svg></div>
+          <h4 data-i18n="b4.h">Reduce el apetito</h4>
+          <p data-i18n="b4.p">Modulación de la saciedad y disminución de la ingesta calórica reportada en la literatura.</p>
         </div>
       </div>
     </div>
@@ -380,43 +328,43 @@
   <section id="protocolo">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Referencia técnica</span>
-        <h2>Guía de protocolo</h2>
-        <p>Esquemas de referencia por presentación para diseño experimental. Uso exclusivo en investigación.</p>
+        <span class="eyebrow" data-i18n="protocol.eyebrow">Referencia técnica</span>
+        <h2 data-i18n="protocol.h2">Guía de protocolo</h2>
+        <p data-i18n="protocol.p">Esquemas de referencia por presentación para diseño experimental. Uso exclusivo en investigación.</p>
       </div>
       <div class="table-glass glass">
         <table>
           <thead>
             <tr>
-              <th>Presentación</th>
-              <th>Duración</th>
-              <th>Dosis semanal</th>
-              <th>Aplicaciones</th>
+              <th data-i18n="th.presentacion">Presentación</th>
+              <th data-i18n="th.duracion">Duración</th>
+              <th data-i18n="th.dosis">Dosis semanal</th>
+              <th data-i18n="th.aplicaciones">Aplicaciones</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="dose" data-label="Presentación"><span class="pill">10 MG</span></td>
-              <td data-label="Duración">4 semanas</td>
-              <td data-label="Dosis semanal">2.5 mg / semana</td>
-              <td data-label="Aplicaciones">Fase de titulación inicial</td>
+              <td class="dose" data-label="Presentación" data-i18n-label="th.presentacion"><span class="pill">10 MG</span></td>
+              <td data-label="Duración" data-i18n-label="th.duracion" data-i18n="dur.4">4 semanas</td>
+              <td data-label="Dosis semanal" data-i18n-label="th.dosis" data-i18n="dose.week">2.5 mg / semana</td>
+              <td data-label="Aplicaciones" data-i18n-label="th.aplicaciones" data-i18n="app1">Fase de titulación inicial</td>
             </tr>
             <tr>
-              <td class="dose" data-label="Presentación"><span class="pill">20 MG</span></td>
-              <td data-label="Duración">8 semanas</td>
-              <td data-label="Dosis semanal">2.5 mg / semana</td>
-              <td data-label="Aplicaciones">Estudio de rango intermedio</td>
+              <td class="dose" data-label="Presentación" data-i18n-label="th.presentacion"><span class="pill">20 MG</span></td>
+              <td data-label="Duración" data-i18n-label="th.duracion" data-i18n="dur.8">8 semanas</td>
+              <td data-label="Dosis semanal" data-i18n-label="th.dosis" data-i18n="dose.week">2.5 mg / semana</td>
+              <td data-label="Aplicaciones" data-i18n-label="th.aplicaciones" data-i18n="app2">Estudio de rango intermedio</td>
             </tr>
             <tr>
-              <td class="dose" data-label="Presentación"><span class="pill">30 MG</span></td>
-              <td data-label="Duración">12 semanas</td>
-              <td data-label="Dosis semanal">2.5 mg / semana</td>
-              <td data-label="Aplicaciones">Protocolo extendido</td>
+              <td class="dose" data-label="Presentación" data-i18n-label="th.presentacion"><span class="pill">30 MG</span></td>
+              <td data-label="Duración" data-i18n-label="th.duracion" data-i18n="dur.12">12 semanas</td>
+              <td data-label="Dosis semanal" data-i18n-label="th.dosis" data-i18n="dose.week">2.5 mg / semana</td>
+              <td data-label="Aplicaciones" data-i18n-label="th.aplicaciones" data-i18n="app3">Protocolo extendido</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="table-note">Los valores son referencias de investigación y no constituyen indicaciones médicas ni pauta de administración humana.</p>
+      <p class="table-note" data-i18n="protocol.note">Los valores son referencias de investigación y no constituyen indicaciones médicas ni pauta de administración humana.</p>
     </div>
   </section>
 
@@ -424,31 +372,25 @@
   <section id="confianza">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Por qué BioFusion</span>
-        <h2>Confianza y respaldo</h2>
-        <p>Cada lote pasa por un flujo de verificación trazable de principio a fin.</p>
+        <span class="eyebrow" data-i18n="trust.eyebrow">Por qué BioFusion</span>
+        <h2 data-i18n="trust.h2">Confianza y respaldo</h2>
+        <p data-i18n="trust.p">Cada lote pasa por un flujo de verificación trazable de principio a fin.</p>
       </div>
       <div class="trust-grid">
         <div class="trust-box glass">
-          <div class="t-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-          </div>
-          <h4>Pureza certificada</h4>
-          <p>Certificado de análisis (CoA) con verificación HPLC &gt;99% incluido en cada envío.</p>
+          <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h4 data-i18n="t1.h">Pureza certificada</h4>
+          <p data-i18n="t1.p">Certificado de análisis (CoA) con verificación HPLC &gt;99% incluido en cada envío.</p>
         </div>
         <div class="trust-box glass">
-          <div class="t-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/><rect x="2" y="8" width="20" height="12" rx="2"/><path d="M12 12v4M9 14h6"/></svg>
-          </div>
-          <h4>Envío en frío</h4>
-          <p>Cadena de frío y embalaje discreto para preservar la estabilidad del péptido.</p>
+          <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/><rect x="2" y="8" width="20" height="12" rx="2"/><path d="M12 12v4M9 14h6"/></svg></div>
+          <h4 data-i18n="t2.h">Envío en frío</h4>
+          <p data-i18n="t2.p">Cadena de frío y embalaje discreto para preservar la estabilidad del péptido.</p>
         </div>
         <div class="trust-box glass">
-          <div class="t-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 1 1-4.6-7.5"/><path d="M8 12l3 3 5-6"/></svg>
-          </div>
-          <h4>Soporte técnico</h4>
-          <p>Asesoría sobre reconstitución, almacenamiento y manejo para tu laboratorio.</p>
+          <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 1 1-4.6-7.5"/><path d="M8 12l3 3 5-6"/></svg></div>
+          <h4 data-i18n="t3.h">Soporte técnico</h4>
+          <p data-i18n="t3.p">Asesoría sobre reconstitución, almacenamiento y manejo para tu laboratorio.</p>
         </div>
       </div>
     </div>
@@ -458,9 +400,15 @@
   <section>
     <div class="wrap">
       <div class="cta-band glass">
-        <h2>¿Listo para tu próximo estudio?</h2>
-        <p>Solicita el certificado de análisis y disponibilidad de lote de Tirzepatide CO-T2.</p>
-        <a href="#" class="btn btn-primary">Solicitar información</a>
+        <h2 data-i18n="cta.h2">¿Listo para tu próximo estudio?</h2>
+        <p data-i18n="cta.p">Solicita el certificado de análisis y disponibilidad de lote de Tirzepatide CO-T2.</p>
+        <div class="hero-cta">
+          <a class="btn btn-wa wa-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.5 1.13 6.744 3.05 9.38L1.06 31.4l6.24-1.996A15.9 15.9 0 0 0 16.004 32C24.83 32 32 24.826 32 16S24.83 0 16.004 0zm9.32 22.6c-.386 1.09-1.92 1.994-3.144 2.26-.836.178-1.928.32-5.604-1.204-4.7-1.948-7.726-6.724-7.962-7.034-.226-.31-1.9-2.53-1.9-4.826 0-2.296 1.174-3.424 1.646-3.906.386-.396.836-.51 1.114-.51.278 0 .556.002.798.014.256.012.6-.098.938.716.386.926 1.31 3.222 1.424 3.456.114.234.19.51.038.82-.14.31-.21.51-.42.784-.21.274-.442.612-.632.822-.21.234-.428.486-.184.906.244.42 1.086 1.79 2.332 2.9 1.602 1.428 2.952 1.87 3.372 2.08.42.21.664.176.91-.106.246-.28 1.05-1.226 1.33-1.646.28-.42.56-.35.938-.21.386.14 2.454 1.158 2.874 1.368.42.21.7.312.804.486.106.174.106 1.006-.28 2.096z"/></svg>
+            <span data-i18n="cta.whatsapp">Cotizar por WhatsApp</span>
+          </a>
+          <a href="#producto" class="btn btn-ghost" data-i18n="cta.btn">Solicitar información</a>
+        </div>
       </div>
     </div>
   </section>
@@ -476,19 +424,138 @@
           <span>BioFusion<small>Research Peptides</small></span>
         </div>
         <nav class="footer-links">
-          <a href="#producto">Producto</a>
-          <a href="#beneficios">Beneficios</a>
-          <a href="#protocolo">Protocolo</a>
-          <a href="#confianza">Confianza</a>
+          <a href="#producto" data-i18n="nav.producto">Producto</a>
+          <a href="#beneficios" data-i18n="nav.beneficios">Beneficios</a>
+          <a href="#protocolo" data-i18n="nav.protocolo">Protocolo</a>
+          <a href="#confianza" data-i18n="nav.confianza">Confianza</a>
+          <a class="wa-inline wa-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.5 1.13 6.744 3.05 9.38L1.06 31.4l6.24-1.996A15.9 15.9 0 0 0 16.004 32C24.83 32 32 24.826 32 16S24.83 0 16.004 0zm9.32 22.6c-.386 1.09-1.92 1.994-3.144 2.26-.836.178-1.928.32-5.604-1.204-4.7-1.948-7.726-6.724-7.962-7.034-.226-.31-1.9-2.53-1.9-4.826 0-2.296 1.174-3.424 1.646-3.906.386-.396.836-.51 1.114-.51.278 0 .556.002.798.014.256.012.6-.098.938.716.386.926 1.31 3.222 1.424 3.456.114.234.19.51.038.82-.14.31-.21.51-.42.784-.21.274-.442.612-.632.822-.21.234-.428.486-.184.906.244.42 1.086 1.79 2.332 2.9 1.602 1.428 2.952 1.87 3.372 2.08.42.21.664.176.91-.106.246-.28 1.05-1.226 1.33-1.646.28-.42.56-.35.938-.21.386.14 2.454 1.158 2.874 1.368.42.21.7.312.804.486.106.174.106 1.006-.28 2.096z"/></svg>
+            +1 317 345 1225
+          </a>
         </nav>
       </div>
     </div>
-    <p class="footer-disclaimer">
+    <p class="footer-disclaimer" data-i18n="footer.disclaimer">
       For Research Use Only (RUO). Los productos de BioFusion se destinan exclusivamente a investigación científica y de laboratorio.
       No están aprobados por la FDA ni por ninguna autoridad sanitaria para diagnóstico, tratamiento, cura o prevención de enfermedades,
       y no son para consumo humano ni veterinario. La información mostrada no constituye consejo médico.
       © 2026 BioFusion Research Peptides. Todos los derechos reservados.
     </p>
   </footer>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a class="wa-float wa-link" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.5 1.13 6.744 3.05 9.38L1.06 31.4l6.24-1.996A15.9 15.9 0 0 0 16.004 32C24.83 32 32 24.826 32 16S24.83 0 16.004 0zm9.32 22.6c-.386 1.09-1.92 1.994-3.144 2.26-.836.178-1.928.32-5.604-1.204-4.7-1.948-7.726-6.724-7.962-7.034-.226-.31-1.9-2.53-1.9-4.826 0-2.296 1.174-3.424 1.646-3.906.386-.396.836-.51 1.114-.51.278 0 .556.002.798.014.256.012.6-.098.938.716.386.926 1.31 3.222 1.424 3.456.114.234.19.51.038.82-.14.31-.21.51-.42.784-.21.274-.442.612-.632.822-.21.234-.428.486-.184.906.244.42 1.086 1.79 2.332 2.9 1.602 1.428 2.952 1.87 3.372 2.08.42.21.664.176.91-.106.246-.28 1.05-1.226 1.33-1.646.28-.42.56-.35.938-.21.386.14 2.454 1.158 2.874 1.368.42.21.7.312.804.486.106.174.106 1.006-.28 2.096z"/></svg>
+  </a>
+
+  <script>
+    // ---------- i18n ligero ES / EN ----------
+    var WA_NUMBER = '13173451225';
+    var I18N = {
+      es: {
+        'nav.producto': 'Producto', 'nav.beneficios': 'Beneficios', 'nav.protocolo': 'Protocolo', 'nav.confianza': 'Confianza', 'nav.ficha': 'Ver ficha',
+        'hero.eyebrow': 'Péptido de investigación · Grado premium',
+        'hero.by': 'por BioFusion',
+        'hero.lead': 'Doble agonista GIP/GLP-1 de máxima pureza para investigación científica. Formulado, verificado y liofilizado bajo estándares de laboratorio exigentes.',
+        'hero.cta1': 'Explorar beneficios', 'hero.cta2': 'Guía de protocolo', 'hero.whatsapp': 'Escríbenos por WhatsApp',
+        'product.sub': 'Vial liofilizado · Reconstituible',
+        'product.desc': 'Péptido de cadena única de 39 aminoácidos, sintetizado con control cromatográfico y validado por HPLC para uso exclusivo en investigación.',
+        'spec.vial': 'Por vial', 'spec.purity': 'Pureza', 'spec.verified': 'Verificado',
+        'ruo': '⚠ For Research Use Only · No para consumo humano',
+        'benefits.eyebrow': 'Perfil farmacológico', 'benefits.h2': 'Áreas de estudio',
+        'benefits.p': 'Datos clínicos publicados sobre tirzepatide señalan efectos relevantes en múltiples vías metabólicas.',
+        'b1.h': 'Pérdida de peso', 'b1.p': 'Reducción significativa de masa corporal observada en estudios metabólicos controlados.',
+        'b2.h': 'Control glucémico', 'b2.p': 'Mejora de la regulación de glucosa y sensibilidad a la insulina en modelos de estudio.',
+        'b3.h': 'Salud cardiovascular', 'b3.p': 'Marcadores cardiometabólicos favorables asociados a la vía GIP/GLP-1.',
+        'b4.h': 'Reduce el apetito', 'b4.p': 'Modulación de la saciedad y disminución de la ingesta calórica reportada en la literatura.',
+        'protocol.eyebrow': 'Referencia técnica', 'protocol.h2': 'Guía de protocolo',
+        'protocol.p': 'Esquemas de referencia por presentación para diseño experimental. Uso exclusivo en investigación.',
+        'th.presentacion': 'Presentación', 'th.duracion': 'Duración', 'th.dosis': 'Dosis semanal', 'th.aplicaciones': 'Aplicaciones',
+        'dur.4': '4 semanas', 'dur.8': '8 semanas', 'dur.12': '12 semanas', 'dose.week': '2.5 mg / semana',
+        'app1': 'Fase de titulación inicial', 'app2': 'Estudio de rango intermedio', 'app3': 'Protocolo extendido',
+        'protocol.note': 'Los valores son referencias de investigación y no constituyen indicaciones médicas ni pauta de administración humana.',
+        'trust.eyebrow': 'Por qué BioFusion', 'trust.h2': 'Confianza y respaldo',
+        'trust.p': 'Cada lote pasa por un flujo de verificación trazable de principio a fin.',
+        't1.h': 'Pureza certificada', 't1.p': 'Certificado de análisis (CoA) con verificación HPLC >99% incluido en cada envío.',
+        't2.h': 'Envío en frío', 't2.p': 'Cadena de frío y embalaje discreto para preservar la estabilidad del péptido.',
+        't3.h': 'Soporte técnico', 't3.p': 'Asesoría sobre reconstitución, almacenamiento y manejo para tu laboratorio.',
+        'cta.h2': '¿Listo para tu próximo estudio?',
+        'cta.p': 'Solicita el certificado de análisis y disponibilidad de lote de Tirzepatide CO-T2.',
+        'cta.btn': 'Solicitar información', 'cta.whatsapp': 'Cotizar por WhatsApp',
+        'footer.disclaimer': 'For Research Use Only (RUO). Los productos de BioFusion se destinan exclusivamente a investigación científica y de laboratorio. No están aprobados por la FDA ni por ninguna autoridad sanitaria para diagnóstico, tratamiento, cura o prevención de enfermedades, y no son para consumo humano ni veterinario. La información mostrada no constituye consejo médico. © 2026 BioFusion Research Peptides. Todos los derechos reservados.',
+        'wa.msg': 'Hola BioFusion, me interesa Tirzepatide CO-T2. ¿Me pueden dar más información?'
+      },
+      en: {
+        'nav.producto': 'Product', 'nav.beneficios': 'Benefits', 'nav.protocolo': 'Protocol', 'nav.confianza': 'Trust', 'nav.ficha': 'View details',
+        'hero.eyebrow': 'Research peptide · Premium grade',
+        'hero.by': 'by BioFusion',
+        'hero.lead': 'A dual GIP/GLP-1 agonist of the highest purity for scientific research. Formulated, verified and lyophilized under demanding laboratory standards.',
+        'hero.cta1': 'Explore benefits', 'hero.cta2': 'Protocol guide', 'hero.whatsapp': 'Message us on WhatsApp',
+        'product.sub': 'Lyophilized vial · Reconstitutable',
+        'product.desc': 'Single-chain 39-amino-acid peptide, synthesized with chromatographic control and HPLC-validated for research use only.',
+        'spec.vial': 'Per vial', 'spec.purity': 'Purity', 'spec.verified': 'Verified',
+        'ruo': '⚠ For Research Use Only · Not for human consumption',
+        'benefits.eyebrow': 'Pharmacological profile', 'benefits.h2': 'Areas of study',
+        'benefits.p': 'Published clinical data on tirzepatide indicate relevant effects across multiple metabolic pathways.',
+        'b1.h': 'Weight loss', 'b1.p': 'Significant body-mass reduction observed in controlled metabolic studies.',
+        'b2.h': 'Glycemic control', 'b2.p': 'Improved glucose regulation and insulin sensitivity in study models.',
+        'b3.h': 'Cardiovascular health', 'b3.p': 'Favorable cardiometabolic markers associated with the GIP/GLP-1 pathway.',
+        'b4.h': 'Reduces appetite', 'b4.p': 'Satiety modulation and reduced caloric intake reported in the literature.',
+        'protocol.eyebrow': 'Technical reference', 'protocol.h2': 'Protocol guide',
+        'protocol.p': 'Reference schemes by presentation for experimental design. Research use only.',
+        'th.presentacion': 'Presentation', 'th.duracion': 'Duration', 'th.dosis': 'Weekly dose', 'th.aplicaciones': 'Applications',
+        'dur.4': '4 weeks', 'dur.8': '8 weeks', 'dur.12': '12 weeks', 'dose.week': '2.5 mg / week',
+        'app1': 'Initial titration phase', 'app2': 'Intermediate-range study', 'app3': 'Extended protocol',
+        'protocol.note': 'Values are research references and do not constitute medical indications or human dosing guidance.',
+        'trust.eyebrow': 'Why BioFusion', 'trust.h2': 'Trust and backing',
+        'trust.p': 'Every batch goes through a traceable verification flow from start to finish.',
+        't1.h': 'Certified purity', 't1.p': 'Certificate of Analysis (CoA) with >99% HPLC verification included in every shipment.',
+        't2.h': 'Cold shipping', 't2.p': 'Cold chain and discreet packaging to preserve peptide stability.',
+        't3.h': 'Technical support', 't3.p': 'Guidance on reconstitution, storage and handling for your lab.',
+        'cta.h2': 'Ready for your next study?',
+        'cta.p': 'Request the Certificate of Analysis and batch availability for Tirzepatide CO-T2.',
+        'cta.btn': 'Request information', 'cta.whatsapp': 'Get a quote on WhatsApp',
+        'footer.disclaimer': 'For Research Use Only (RUO). BioFusion products are intended exclusively for scientific and laboratory research. They are not approved by the FDA or any health authority for the diagnosis, treatment, cure or prevention of any disease, and are not for human or veterinary consumption. The information shown does not constitute medical advice. © 2026 BioFusion Research Peptides. All rights reserved.',
+        'wa.msg': "Hi BioFusion, I'm interested in Tirzepatide CO-T2. Could you send me more information?"
+      }
+    };
+
+    function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+    function safeSet(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+
+    function setLang(lang){
+      var dict = I18N[lang] || I18N.es;
+      document.documentElement.lang = lang;
+      safeSet('bf-lang', lang);
+
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var k = el.getAttribute('data-i18n');
+        if (dict[k] !== undefined) el.textContent = dict[k];
+      });
+      document.querySelectorAll('[data-i18n-label]').forEach(function(el){
+        var k = el.getAttribute('data-i18n-label');
+        if (dict[k] !== undefined) el.setAttribute('data-label', dict[k]);
+      });
+
+      var waHref = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(dict['wa.msg'] || '');
+      document.querySelectorAll('.wa-link').forEach(function(a){ a.setAttribute('href', waHref); });
+
+      var label = document.getElementById('langLabel');
+      var toggle = document.getElementById('langToggle');
+      if (label) label.textContent = (lang === 'es') ? 'EN' : 'ES';
+      if (toggle) toggle.setAttribute('aria-label', (lang === 'es') ? 'Switch to English' : 'Cambiar a español');
+    }
+
+    (function init(){
+      var stored = safeGet('bf-lang');
+      var lang = (stored === 'en' || stored === 'es') ? stored : 'es';
+      setLang(lang);
+      var toggle = document.getElementById('langToggle');
+      if (toggle) toggle.addEventListener('click', function(){
+        var next = (document.documentElement.lang === 'es') ? 'en' : 'es';
+        setLang(next);
+      });
+    })();
+  </script>
 </body>
 </html>

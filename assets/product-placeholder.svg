@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 260" role="img" aria-label="Vial Tirzepatide CO-T2">
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e8fbf7"/>
+      <stop offset="0.5" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#d3f3ee"/>
+    </linearGradient>
+    <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#0d9488"/>
+    </linearGradient>
+  </defs>
+  <!-- Tapa azul -->
+  <rect x="54" y="8" width="52" height="26" rx="7" fill="#1e6fd8"/>
+  <rect x="50" y="30" width="60" height="14" rx="4" fill="#c3cdd6"/>
+  <rect x="50" y="30" width="60" height="6" rx="3" fill="#e4eaef"/>
+  <!-- Cuerpo del vial -->
+  <rect x="44" y="44" width="72" height="200" rx="20" fill="url(#glass)" stroke="#9fd8d0" stroke-width="2"/>
+  <!-- Líquido -->
+  <path d="M48 150 h64 v72 a16 16 0 0 1 -16 16 h-32 a16 16 0 0 1 -16 -16 z" fill="url(#liq)" opacity="0.35"/>
+  <!-- Etiqueta -->
+  <rect x="50" y="120" width="60" height="96" rx="4" fill="#ffffff" opacity="0.82"/>
+  <text x="80" y="150" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="800" font-size="22" fill="#0f2b2a">CO-T2</text>
+  <text x="80" y="170" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="9" fill="#0d9488">20 MG · &gt;99%</text>
+  <rect x="50" y="196" width="60" height="20" rx="0" fill="#0f2b2a"/>
+  <text x="80" y="210" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="7.5" fill="#ffffff" letter-spacing="0.5">RESEARCH USE ONLY</text>
+  <!-- Brillo -->
+  <rect x="54" y="52" width="10" height="150" rx="5" fill="#ffffff" opacity="0.5"/>
+</svg>

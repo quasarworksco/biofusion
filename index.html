@@ -5,11 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="BioFusion Tirzepatide CO-T2 — péptido de investigación de alta pureza (>99%). Vial 20 MG. For Research Use Only." />
   <title>BioFusion · Tirzepatide CO-T2</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <!-- Datos estructurados de producto (Schema.org). Añadir "image" y "url" cuando haya fotos y dominio. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Tirzepatide CO-T2",
+    "sku": "CO-T2-20MG",
+    "category": "Research Peptide",
+    "brand": { "@type": "Brand", "name": "BioFusion" },
+    "description": "Tirzepatide CO-T2 research peptide, >99% HPLC purity, 20 mg lyophilized vial. For Research Use Only — not for human consumption.",
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Purity", "value": ">99% (HPLC)" },
+      { "@type": "PropertyValue", "name": "Presentation", "value": "20 mg lyophilized vial" },
+      { "@type": "PropertyValue", "name": "Intended use", "value": "Research Use Only" }
+    ]
+  }
+  </script>
   <style>
-    /* Fuente "Modern Professional" (Poppins + Open Sans). Degrada a stack del sistema si no carga. */
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+    /* Fuentes autoalojadas "Modern Professional" (Poppins + Open Sans).
+       Archivos woff2 locales en assets/fonts/ — sin dependencias de terceros (mejor privacidad/GDPR y velocidad). */
+    @font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 300; font-display: swap; src: url('assets/fonts/open-sans-latin-300-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/open-sans-latin-400-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/open-sans-latin-500-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/open-sans-latin-600-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/open-sans-latin-700-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/poppins-latin-400-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/poppins-latin-500-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/poppins-latin-600-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/poppins-latin-700-normal.woff2') format('woff2'); }
+    @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 800; font-display: swap; src: url('assets/fonts/poppins-latin-800-normal.woff2') format('woff2'); }
 
     :root {
       --turq-600: #0d9488;
@@ -110,6 +136,22 @@
     .lang-toggle:hover { transform: translateY(-2px); background: #fff; }
     .lang-toggle svg { width: 15px; height: 15px; stroke: var(--turq-600); }
 
+    /* Hamburguesa (solo móvil) */
+    .hamburger { display: none; width: 42px; height: 42px; border: 1px solid rgba(20,184,166,0.35); background: var(--glass-bg-strong); border-radius: 11px; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+    .hamburger span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--turq-deep); transition: transform 0.25s, opacity 0.25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Panel desplegable móvil */
+    .mobile-menu { display: none; flex-direction: column; gap: 6px; margin-top: 10px; padding: 14px; }
+    .mobile-menu.open { display: flex; animation: menuDrop 0.22s ease; }
+    .mobile-menu a { color: var(--ink-soft); text-decoration: none; font-family: var(--font-head); font-weight: 500; font-size: 0.98rem; padding: 12px 14px; border-radius: 12px; transition: background 0.2s, color 0.2s; }
+    .mobile-menu a:hover { background: rgba(20,184,166,0.10); color: var(--turq-600); }
+    .mobile-menu a.btn { justify-content: center; margin-top: 6px; color: #fff; }
+    .mobile-menu a.btn:hover { color: #fff; }
+    @keyframes menuDrop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
     /* ---------- Hero ---------- */
     .hero { padding: 70px 0 40px; }
     .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
@@ -173,6 +215,76 @@
     .cta-band p { color: var(--ink-soft); margin-bottom: 28px; max-width: 520px; margin-left: auto; margin-right: auto; }
     .cta-band .hero-cta { justify-content: center; }
 
+    /* ---------- Contacto ---------- */
+    .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
+    .contact-form { padding: 32px; }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-family: var(--font-head); font-weight: 600; font-size: 0.85rem; color: var(--ink); margin-bottom: 7px; }
+    .field input, .field textarea {
+      width: 100%; font-family: var(--font-body); font-size: 0.95rem; color: var(--ink);
+      padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(20,184,166,0.28);
+      background: rgba(255,255,255,0.7); transition: border-color 0.2s, box-shadow 0.2s; resize: vertical;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--ink-dim); }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--turq-500); box-shadow: 0 0 0 3px rgba(20,184,166,0.18); }
+    .field input:invalid:not(:placeholder-shown) { border-color: #e0736b; }
+    .contact-form .btn { width: 100%; margin-top: 4px; }
+    .form-status { text-align: center; font-size: 0.9rem; margin-top: 14px; min-height: 1.2em; }
+    .form-status.ok { color: var(--turq-deep); font-weight: 600; }
+    .form-status.err { color: #c2453b; font-weight: 600; }
+
+    .contact-aside { padding: 28px; }
+    .contact-aside h4 { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; color: var(--ink); margin-bottom: 18px; }
+    .channel { display: flex; align-items: center; gap: 14px; padding: 12px; border-radius: 14px; text-decoration: none; transition: background 0.2s; margin-bottom: 8px; }
+    .channel:hover { background: rgba(20,184,166,0.08); }
+    .channel .ch-ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0; }
+    .channel .ch-ic svg { width: 22px; height: 22px; }
+    .channel .ch-txt { display: flex; flex-direction: column; line-height: 1.3; }
+    .channel .ch-txt b { font-family: var(--font-head); font-size: 0.95rem; color: var(--ink); }
+    .channel .ch-txt small { font-size: 0.85rem; color: var(--ink-soft); }
+    .aside-note { margin-top: 14px; padding-top: 16px; border-top: 1px solid rgba(15,118,110,0.14); font-size: 0.82rem; color: var(--ink-dim); }
+
+    /* ---------- Splash screen ---------- */
+    .splash { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center;
+      background: linear-gradient(165deg, #f2fffc 0%, #e6fbf6 50%, #eafcf8 100%);
+      transition: opacity 0.5s ease, visibility 0.5s ease; }
+    .splash.hide { opacity: 0; visibility: hidden; }
+    .splash-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; animation: splashIn 0.6s ease; }
+    .splash-logo { width: 104px; height: 104px; object-fit: contain; animation: logoPulse 1.9s ease-in-out infinite; }
+    .splash-logo.is-fallback { width: 88px; height: 88px; }
+    .wordmark { font-family: var(--font-head); font-weight: 800; font-size: 2.2rem; letter-spacing: -0.5px; line-height: 1; }
+    .wm-bio { color: #0d9488; }
+    .wm-fusion { color: #1e6fd8; }
+    .splash-tag { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-dim); }
+    @keyframes splashIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    @keyframes logoPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+
+    /* Logo real en nav/footer + wordmark bicolor */
+    .brand-logo { width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; }
+    .brand .wm-bio { color: #0d9488; }
+    .brand .wm-fusion { color: #1e6fd8; }
+
+    /* ---------- Hero: visual del producto ---------- */
+    .hero-visual { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 440px; }
+    .hv-glow { position: absolute; width: 340px; height: 340px; border-radius: 50%; top: 42%; left: 50%; transform: translate(-50%,-50%);
+      background: radial-gradient(circle, rgba(45,212,191,0.55), rgba(6,182,212,0.16) 58%, transparent 72%); filter: blur(12px); z-index: 0; }
+    .hv-tag { position: absolute; top: 8px; right: 6px; z-index: 3; }
+    .product-shot { position: relative; z-index: 2; max-width: 330px; width: 80%; height: auto;
+      filter: drop-shadow(0 26px 42px rgba(13,80,80,0.30)); animation: floatY 5s ease-in-out infinite; }
+    .product-shot.is-fallback { width: auto; max-height: 350px; }
+    @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    .hv-card { position: relative; z-index: 2; margin-top: -14px; width: 100%; max-width: 380px; padding: 18px; }
+    .hv-card .specs { margin-bottom: 12px; }
+    .hv-card .ruo-badge { margin-top: 0; }
+
+    /* ---------- CTA con imagen del producto ---------- */
+    .cta-with-img { display: grid; grid-template-columns: 0.62fr 1.38fr; gap: 30px; align-items: center; text-align: left; }
+    .cta-shot { position: relative; display: grid; place-items: center; }
+    .cta-glow { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(45,212,191,0.45), transparent 70%); filter: blur(10px); }
+    .cta-shot img { position: relative; z-index: 2; max-width: 150px; width: 100%; height: auto; filter: drop-shadow(0 16px 28px rgba(13,80,80,0.25)); }
+    .cta-with-img h2, .cta-with-img p { margin-left: 0; margin-right: 0; }
+    .cta-with-img .hero-cta { justify-content: flex-start; }
+
     /* ---------- Floating WhatsApp ---------- */
     .wa-float { position: fixed; right: 22px; bottom: 22px; width: 58px; height: 58px; border-radius: 50%; background: var(--wa); display: grid; place-items: center; box-shadow: 0 8px 24px rgba(37,211,102,0.5); z-index: 60; transition: transform 0.2s; animation: wapulse 2.6s ease-in-out infinite; }
     .wa-float:hover { transform: scale(1.09); }
@@ -200,6 +312,14 @@
       .benefits-grid { grid-template-columns: repeat(2, 1fr); }
       .trust-grid { grid-template-columns: 1fr; }
       nav.links { display: none; }
+      .hamburger { display: flex; }
+      .nav-cta { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .cta-with-img { grid-template-columns: 1fr; text-align: center; }
+      .cta-with-img h2, .cta-with-img p { margin-left: auto; margin-right: auto; }
+      .cta-with-img .hero-cta { justify-content: center; }
+      .cta-shot img { max-width: 130px; }
+      .hero-visual { min-height: 0; margin-top: 10px; }
     }
     @media (max-width: 560px) {
       .wrap { padding: 0 16px; }
@@ -221,6 +341,16 @@
   </style>
 </head>
 <body>
+  <!-- ===== SPLASH SCREEN ===== -->
+  <div class="splash" id="splash">
+    <div class="splash-inner">
+      <img class="splash-logo" src="assets/logo.png" alt="BioFusion"
+           onerror="this.onerror=null;this.src='favicon.svg';this.classList.add('is-fallback');" />
+      <div class="wordmark"><span class="wm-bio">Bio</span><span class="wm-fusion">Fusion</span></div>
+      <span class="splash-tag">Research Peptides</span>
+    </div>
+  </div>
+
   <div class="orb o1"></div>
   <div class="orb o2"></div>
   <div class="orb o3"></div>
@@ -230,24 +360,36 @@
     <div class="wrap">
       <div class="nav-inner glass">
         <div class="brand">
-          <span class="logo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-6"/><path d="M8 8h8l-2 4 2 4H8l2-4z"/></svg>
-          </span>
-          <span>BioFusion<small>Research Peptides</small></span>
+          <img class="brand-logo" src="assets/logo.png" alt="BioFusion"
+               onerror="this.onerror=null;this.src='favicon.svg';" />
+          <span><span class="wm-bio">Bio</span><span class="wm-fusion">Fusion</span><small>Research Peptides</small></span>
         </div>
         <nav class="links">
           <a href="#producto" data-i18n="nav.producto">Producto</a>
           <a href="#beneficios" data-i18n="nav.beneficios">Beneficios</a>
           <a href="#protocolo" data-i18n="nav.protocolo">Protocolo</a>
           <a href="#confianza" data-i18n="nav.confianza">Confianza</a>
+          <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
         </nav>
         <div class="nav-actions">
           <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20a15.3 15.3 0 0 1 0-20z"/></svg>
             <span id="langLabel">EN</span>
           </button>
-          <a href="#producto" class="btn btn-primary" data-i18n="nav.ficha">Ver ficha</a>
+          <a href="#producto" class="btn btn-primary nav-cta" data-i18n="nav.ficha">Ver ficha</a>
+          <button class="hamburger" id="hamburger" type="button" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
         </div>
+      </div>
+      <!-- Menú desplegable móvil -->
+      <div class="mobile-menu glass" id="mobileMenu">
+        <a href="#producto" data-i18n="nav.producto">Producto</a>
+        <a href="#beneficios" data-i18n="nav.beneficios">Beneficios</a>
+        <a href="#protocolo" data-i18n="nav.protocolo">Protocolo</a>
+        <a href="#confianza" data-i18n="nav.confianza">Confianza</a>
+        <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
+        <a href="#producto" class="btn btn-primary" data-i18n="nav.ficha">Ver ficha</a>
       </div>
     </div>
   </header>
@@ -270,22 +412,19 @@
           </div>
         </div>
 
-        <div class="product-card glass">
-          <div class="pc-top">
-            <span class="pc-vial">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v4M14 2v4"/><path d="M8 6h8v12a4 4 0 0 1-8 0z"/><path d="M8 12h8"/></svg>
-            </span>
-            <span class="pc-tag">CO-T2</span>
+        <div class="hero-visual">
+          <span class="hv-glow"></span>
+          <span class="pc-tag hv-tag">CO-T2</span>
+          <img class="product-shot" src="assets/product.png" alt="Vial Tirzepatide CO-T2 · 20 MG"
+               onerror="this.onerror=null;this.src='assets/product-placeholder.svg';this.classList.add('is-fallback');" />
+          <div class="hv-card glass">
+            <div class="specs">
+              <div class="spec"><div class="num">20 MG</div><div class="lbl" data-i18n="spec.vial">Por vial</div></div>
+              <div class="spec"><div class="num">&gt;99%</div><div class="lbl" data-i18n="spec.purity">Pureza</div></div>
+              <div class="spec"><div class="num">HPLC</div><div class="lbl" data-i18n="spec.verified">Verificado</div></div>
+            </div>
+            <div class="ruo-badge" data-i18n="ruo">⚠ For Research Use Only · No para consumo humano</div>
           </div>
-          <h3>Tirzepatide</h3>
-          <p class="sub" data-i18n="product.sub">Vial liofilizado · Reconstituible</p>
-          <p class="desc" data-i18n="product.desc">Péptido de cadena única de 39 aminoácidos, sintetizado con control cromatográfico y validado por HPLC para uso exclusivo en investigación.</p>
-          <div class="specs">
-            <div class="spec"><div class="num">20 MG</div><div class="lbl" data-i18n="spec.vial">Por vial</div></div>
-            <div class="spec"><div class="num">&gt;99%</div><div class="lbl" data-i18n="spec.purity">Pureza</div></div>
-            <div class="spec"><div class="num">HPLC</div><div class="lbl" data-i18n="spec.verified">Verificado</div></div>
-          </div>
-          <div class="ruo-badge" data-i18n="ruo">⚠ For Research Use Only · No para consumo humano</div>
         </div>
       </div>
     </div>
@@ -396,18 +535,71 @@
     </div>
   </section>
 
+  <!-- ===== CONTACTO ===== -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="contact.eyebrow">Contacto</span>
+        <h2 data-i18n="contact.h2">Hablemos de tu proyecto</h2>
+        <p data-i18n="contact.p">Escríbenos y te enviamos el certificado de análisis, disponibilidad de lote y precios.</p>
+      </div>
+      <div class="contact-grid">
+        <form class="contact-form glass" id="contactForm" novalidate>
+          <div class="field">
+            <label for="cf-name" data-i18n="contact.name">Nombre</label>
+            <input id="cf-name" name="name" type="text" autocomplete="name" placeholder=" " required />
+          </div>
+          <div class="field">
+            <label for="cf-email" data-i18n="contact.email">Correo electrónico</label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" placeholder=" " required />
+          </div>
+          <div class="field">
+            <label for="cf-msg" data-i18n="contact.message">Mensaje</label>
+            <textarea id="cf-msg" name="message" rows="4" placeholder=" " required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="cfSubmit" data-i18n="contact.send">Enviar mensaje</button>
+          <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="contact-aside glass">
+          <h4 data-i18n="contact.direct">Contacto directo</h4>
+          <a class="channel wa-link" target="_blank" rel="noopener">
+            <span class="ch-ic" style="background:linear-gradient(135deg,#25d366,#1ebe5b)">
+              <svg viewBox="0 0 32 32" fill="#fff"><path d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.5 1.13 6.744 3.05 9.38L1.06 31.4l6.24-1.996A15.9 15.9 0 0 0 16.004 32C24.83 32 32 24.826 32 16S24.83 0 16.004 0zm9.32 22.6c-.386 1.09-1.92 1.994-3.144 2.26-.836.178-1.928.32-5.604-1.204-4.7-1.948-7.726-6.724-7.962-7.034-.226-.31-1.9-2.53-1.9-4.826 0-2.296 1.174-3.424 1.646-3.906.386-.396.836-.51 1.114-.51.278 0 .556.002.798.014.256.012.6-.098.938.716.386.926 1.31 3.222 1.424 3.456.114.234.19.51.038.82-.14.31-.21.51-.42.784-.21.274-.442.612-.632.822-.21.234-.428.486-.184.906.244.42 1.086 1.79 2.332 2.9 1.602 1.428 2.952 1.87 3.372 2.08.42.21.664.176.91-.106.246-.28 1.05-1.226 1.33-1.646.28-.42.56-.35.938-.21.386.14 2.454 1.158 2.874 1.368.42.21.7.312.804.486.106.174.106 1.006-.28 2.096z"/></svg>
+            </span>
+            <span class="ch-txt"><b>WhatsApp</b><small>+1 317 345 1225</small></span>
+          </a>
+          <a class="channel email-link" id="emailLink">
+            <span class="ch-ic" style="background:linear-gradient(135deg,var(--turq-500),var(--cyan-500))">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg>
+            </span>
+            <span class="ch-txt"><b data-i18n="contact.email">Correo electrónico</b><small id="emailText" data-i18n="contact.emailSoon">Disponible pronto</small></span>
+          </a>
+          <p class="aside-note" data-i18n="contact.ruoNote">Atención exclusiva a clientes de investigación. Respuesta en 24–48 h hábiles.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CTA FINAL ===== -->
   <section>
     <div class="wrap">
-      <div class="cta-band glass">
-        <h2 data-i18n="cta.h2">¿Listo para tu próximo estudio?</h2>
-        <p data-i18n="cta.p">Solicita el certificado de análisis y disponibilidad de lote de Tirzepatide CO-T2.</p>
-        <div class="hero-cta">
-          <a class="btn btn-wa wa-link" target="_blank" rel="noopener">
-            <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.5 1.13 6.744 3.05 9.38L1.06 31.4l6.24-1.996A15.9 15.9 0 0 0 16.004 32C24.83 32 32 24.826 32 16S24.83 0 16.004 0zm9.32 22.6c-.386 1.09-1.92 1.994-3.144 2.26-.836.178-1.928.32-5.604-1.204-4.7-1.948-7.726-6.724-7.962-7.034-.226-.31-1.9-2.53-1.9-4.826 0-2.296 1.174-3.424 1.646-3.906.386-.396.836-.51 1.114-.51.278 0 .556.002.798.014.256.012.6-.098.938.716.386.926 1.31 3.222 1.424 3.456.114.234.19.51.038.82-.14.31-.21.51-.42.784-.21.274-.442.612-.632.822-.21.234-.428.486-.184.906.244.42 1.086 1.79 2.332 2.9 1.602 1.428 2.952 1.87 3.372 2.08.42.21.664.176.91-.106.246-.28 1.05-1.226 1.33-1.646.28-.42.56-.35.938-.21.386.14 2.454 1.158 2.874 1.368.42.21.7.312.804.486.106.174.106 1.006-.28 2.096z"/></svg>
-            <span data-i18n="cta.whatsapp">Cotizar por WhatsApp</span>
-          </a>
-          <a href="#producto" class="btn btn-ghost" data-i18n="cta.btn">Solicitar información</a>
+      <div class="cta-band cta-with-img glass">
+        <div class="cta-shot">
+          <span class="cta-glow"></span>
+          <img src="assets/product.png" alt="Vial Tirzepatide CO-T2"
+               onerror="this.onerror=null;this.src='assets/product-placeholder.svg';this.classList.add('is-fallback');" />
+        </div>
+        <div class="cta-text">
+          <h2 data-i18n="cta.h2">¿Listo para tu próximo estudio?</h2>
+          <p data-i18n="cta.p">Solicita el certificado de análisis y disponibilidad de lote de Tirzepatide CO-T2.</p>
+          <div class="hero-cta">
+            <a class="btn btn-wa wa-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.5 1.13 6.744 3.05 9.38L1.06 31.4l6.24-1.996A15.9 15.9 0 0 0 16.004 32C24.83 32 32 24.826 32 16S24.83 0 16.004 0zm9.32 22.6c-.386 1.09-1.92 1.994-3.144 2.26-.836.178-1.928.32-5.604-1.204-4.7-1.948-7.726-6.724-7.962-7.034-.226-.31-1.9-2.53-1.9-4.826 0-2.296 1.174-3.424 1.646-3.906.386-.396.836-.51 1.114-.51.278 0 .556.002.798.014.256.012.6-.098.938.716.386.926 1.31 3.222 1.424 3.456.114.234.19.51.038.82-.14.31-.21.51-.42.784-.21.274-.442.612-.632.822-.21.234-.428.486-.184.906.244.42 1.086 1.79 2.332 2.9 1.602 1.428 2.952 1.87 3.372 2.08.42.21.664.176.91-.106.246-.28 1.05-1.226 1.33-1.646.28-.42.56-.35.938-.21.386.14 2.454 1.158 2.874 1.368.42.21.7.312.804.486.106.174.106 1.006-.28 2.096z"/></svg>
+              <span data-i18n="cta.whatsapp">Cotizar por WhatsApp</span>
+            </a>
+            <a href="#contacto" class="btn btn-ghost" data-i18n="cta.btn">Solicitar información</a>
+          </div>
         </div>
       </div>
     </div>
@@ -418,10 +610,9 @@
     <div class="wrap">
       <div class="footer-inner">
         <div class="brand">
-          <span class="logo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-6"/><path d="M8 8h8l-2 4 2 4H8l2-4z"/></svg>
-          </span>
-          <span>BioFusion<small>Research Peptides</small></span>
+          <img class="brand-logo" src="assets/logo.png" alt="BioFusion"
+               onerror="this.onerror=null;this.src='favicon.svg';" />
+          <span><span class="wm-bio">Bio</span><span class="wm-fusion">Fusion</span><small>Research Peptides</small></span>
         </div>
         <nav class="footer-links">
           <a href="#producto" data-i18n="nav.producto">Producto</a>
@@ -449,11 +640,31 @@
   </a>
 
   <script>
-    // ---------- i18n ligero ES / EN ----------
+    // ---------- Configuración ----------
     var WA_NUMBER = '13173451225';
+    // Correo de destino del formulario. Cuando lo tengas, ponlo aquí (ej. 'ventas@biofusion.com').
+    // Con solo el correo, el formulario abre el cliente de email del visitante (mailto), sin backend.
+    var CONTACT_EMAIL = '';
+    // Opcional: endpoint de un servicio sin backend (Formspree/Web3Forms). Si se define, se usa en vez de mailto.
+    // Ej. Formspree: 'https://formspree.io/f/xxxxxxx'  ·  Web3Forms: 'https://api.web3forms.com/submit'
+    var FORM_ENDPOINT = '';
+    // Solo Web3Forms: pega tu access key aquí.
+    var WEB3FORMS_KEY = '';
+
+    // ---------- i18n ligero ES / EN ----------
     var I18N = {
       es: {
-        'nav.producto': 'Producto', 'nav.beneficios': 'Beneficios', 'nav.protocolo': 'Protocolo', 'nav.confianza': 'Confianza', 'nav.ficha': 'Ver ficha',
+        'nav.producto': 'Producto', 'nav.beneficios': 'Beneficios', 'nav.protocolo': 'Protocolo', 'nav.confianza': 'Confianza', 'nav.contacto': 'Contacto', 'nav.ficha': 'Ver ficha',
+        'contact.eyebrow': 'Contacto', 'contact.h2': 'Hablemos de tu proyecto',
+        'contact.p': 'Escríbenos y te enviamos el certificado de análisis, disponibilidad de lote y precios.',
+        'contact.name': 'Nombre', 'contact.email': 'Correo electrónico', 'contact.message': 'Mensaje',
+        'contact.send': 'Enviar mensaje', 'contact.sending': 'Enviando…',
+        'contact.ok': '¡Gracias! Tu mensaje fue enviado. Te responderemos pronto.',
+        'contact.err': 'No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.',
+        'contact.invalid': 'Completa tu nombre, un correo válido y un mensaje.',
+        'contact.direct': 'Contacto directo', 'contact.emailSoon': 'Disponible pronto',
+        'contact.ruoNote': 'Atención exclusiva a clientes de investigación. Respuesta en 24–48 h hábiles.',
+        'contact.mailSubject': 'Consulta sobre Tirzepatide CO-T2',
         'hero.eyebrow': 'Péptido de investigación · Grado premium',
         'hero.by': 'por BioFusion',
         'hero.lead': 'Doble agonista GIP/GLP-1 de máxima pureza para investigación científica. Formulado, verificado y liofilizado bajo estándares de laboratorio exigentes.',
@@ -486,7 +697,17 @@
         'wa.msg': 'Hola BioFusion, me interesa Tirzepatide CO-T2. ¿Me pueden dar más información?'
       },
       en: {
-        'nav.producto': 'Product', 'nav.beneficios': 'Benefits', 'nav.protocolo': 'Protocol', 'nav.confianza': 'Trust', 'nav.ficha': 'View details',
+        'nav.producto': 'Product', 'nav.beneficios': 'Benefits', 'nav.protocolo': 'Protocol', 'nav.confianza': 'Trust', 'nav.contacto': 'Contact', 'nav.ficha': 'View details',
+        'contact.eyebrow': 'Contact', 'contact.h2': "Let's talk about your project",
+        'contact.p': "Send us a message and we'll share the Certificate of Analysis, batch availability and pricing.",
+        'contact.name': 'Name', 'contact.email': 'Email', 'contact.message': 'Message',
+        'contact.send': 'Send message', 'contact.sending': 'Sending…',
+        'contact.ok': "Thank you! Your message was sent. We'll get back to you soon.",
+        'contact.err': 'Could not send. Please try again or reach us on WhatsApp.',
+        'contact.invalid': 'Please enter your name, a valid email and a message.',
+        'contact.direct': 'Direct contact', 'contact.emailSoon': 'Available soon',
+        'contact.ruoNote': 'Research customers only. Reply within 24–48 business hours.',
+        'contact.mailSubject': 'Inquiry about Tirzepatide CO-T2',
         'hero.eyebrow': 'Research peptide · Premium grade',
         'hero.by': 'by BioFusion',
         'hero.lead': 'A dual GIP/GLP-1 agonist of the highest purity for scientific research. Formulated, verified and lyophilized under demanding laboratory standards.',
@@ -544,6 +765,53 @@
       var toggle = document.getElementById('langToggle');
       if (label) label.textContent = (lang === 'es') ? 'EN' : 'ES';
       if (toggle) toggle.setAttribute('aria-label', (lang === 'es') ? 'Switch to English' : 'Cambiar a español');
+
+      // Email de contacto: si está configurado, mostrarlo y activar mailto con asunto localizado
+      if (CONTACT_EMAIL) {
+        var emailText = document.getElementById('emailText');
+        var emailLink = document.getElementById('emailLink');
+        if (emailText) { emailText.removeAttribute('data-i18n'); emailText.textContent = CONTACT_EMAIL; }
+        if (emailLink) emailLink.setAttribute('href', 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(dict['contact.mailSubject'] || ''));
+      }
+    }
+
+    function t(key){ return (I18N[document.documentElement.lang] || I18N.es)[key] || ''; }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      var name = document.getElementById('cf-name').value.trim();
+      var email = document.getElementById('cf-email').value.trim();
+      var msg = document.getElementById('cf-msg').value.trim();
+      var status = document.getElementById('cfStatus');
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!name || !emailOk || !msg) { status.className = 'form-status err'; status.textContent = t('contact.invalid'); return; }
+
+      var btn = document.getElementById('cfSubmit');
+
+      // 1) Servicio sin backend (Formspree / Web3Forms) si está configurado
+      if (FORM_ENDPOINT) {
+        btn.disabled = true; status.className = 'form-status'; status.textContent = t('contact.sending');
+        var payload = { name: name, email: email, message: msg, _subject: t('contact.mailSubject') };
+        if (WEB3FORMS_KEY) payload.access_key = WEB3FORMS_KEY;
+        fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+          .then(function(r){ if (!r.ok) throw new Error('bad'); return r.json().catch(function(){ return {}; }); })
+          .then(function(){ status.className = 'form-status ok'; status.textContent = t('contact.ok'); e.target.reset(); })
+          .catch(function(){ status.className = 'form-status err'; status.textContent = t('contact.err'); })
+          .then(function(){ btn.disabled = false; });
+        return;
+      }
+
+      // 2) Fallback mailto (solo requiere CONTACT_EMAIL)
+      if (CONTACT_EMAIL) {
+        var subject = encodeURIComponent(t('contact.mailSubject'));
+        var body = encodeURIComponent(name + ' <' + email + '>\n\n' + msg);
+        window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + body;
+        status.className = 'form-status ok'; status.textContent = t('contact.ok');
+        return;
+      }
+
+      // 3) Aún sin configurar: invita a usar WhatsApp
+      status.className = 'form-status err'; status.textContent = t('contact.err');
     }
 
     function detectLang(){
@@ -566,11 +834,38 @@
     (function init(){
       var lang = detectLang();
       setLang(lang);
+
       var toggle = document.getElementById('langToggle');
       if (toggle) toggle.addEventListener('click', function(){
         var next = (document.documentElement.lang === 'es') ? 'en' : 'es';
         setLang(next);
       });
+
+      // Menú hamburguesa móvil
+      var burger = document.getElementById('hamburger');
+      var menu = document.getElementById('mobileMenu');
+      if (burger && menu) {
+        burger.addEventListener('click', function(){
+          var open = menu.classList.toggle('open');
+          burger.classList.toggle('open', open);
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        menu.querySelectorAll('a').forEach(function(a){
+          a.addEventListener('click', function(){
+            menu.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // Formulario de contacto
+      var form = document.getElementById('contactForm');
+      if (form) form.addEventListener('submit', handleSubmit);
+
+      // Ocultar splash screen (al terminar de cargar, con mínimo visible; y fallback por si acaso)
+      var splash = document.getElementById('splash');
+      function hideSplash(){ if (splash) splash.classList.add('hide'); }
+      window.addEventListener('load', function(){ setTimeout(hideSplash, 550); });
+      setTimeout(hideSplash, 2600);
     })();
   </script>
 </body>

@@ -546,9 +546,25 @@
       if (toggle) toggle.setAttribute('aria-label', (lang === 'es') ? 'Switch to English' : 'Cambiar a español');
     }
 
-    (function init(){
+    function detectLang(){
+      // 1) Preferencia guardada (elección manual del usuario) tiene prioridad
       var stored = safeGet('bf-lang');
-      var lang = (stored === 'en' || stored === 'es') ? stored : 'es';
+      if (stored === 'en' || stored === 'es') return stored;
+      // 2) Primera visita: detectar del navegador. Español si alguno de los
+      //    idiomas preferidos empieza por "es"; en caso contrario, inglés.
+      var langs = (navigator.languages && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || 'es'];
+      for (var i = 0; i < langs.length; i++) {
+        var l = (langs[i] || '').toLowerCase();
+        if (l.indexOf('es') === 0) return 'es';
+        if (l.indexOf('en') === 0) return 'en';
+      }
+      return 'es';
+    }
+
+    (function init(){
+      var lang = detectLang();
       setLang(lang);
       var toggle = document.getElementById('langToggle');
       if (toggle) toggle.addEventListener('click', function(){

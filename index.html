@@ -99,10 +99,29 @@
 
     /* ---------- Glass ---------- */
     .glass {
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: blur(var(--blur)); backdrop-filter: blur(var(--blur));
-      border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: var(--radius);
+      position: relative;
+      background: linear-gradient(155deg, rgba(255,255,255,0.66), rgba(255,255,255,0.36));
+      -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 12px 38px rgba(13,148,136,0.16), inset 0 1px 0 rgba(255,255,255,0.85), inset 0 0 0 1px rgba(255,255,255,0.06);
+      border-radius: var(--radius);
     }
+    /* Reflejo/brillo sutil de esquina superior en cada panel de vidrio */
+    .glass::after {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      background: radial-gradient(130% 85% at 12% -5%, rgba(255,255,255,0.5), rgba(255,255,255,0) 52%);
+    }
+    .glass > * { position: relative; z-index: 1; }
+
+    /* ---------- Animaciones de entrada (scroll reveal) ---------- */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .75s cubic-bezier(.2,.7,.2,1), transform .75s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .benefits-grid .benefit:nth-child(2) { transition-delay: .08s; }
+    .benefits-grid .benefit:nth-child(3) { transition-delay: .16s; }
+    .benefits-grid .benefit:nth-child(4) { transition-delay: .24s; }
+    .trust-grid .trust-box:nth-child(2) { transition-delay: .1s; }
+    .trust-grid .trust-box:nth-child(3) { transition-delay: .2s; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; transition: none; } .orb, .product-shot, .wa-float { animation: none !important; } }
 
     /* ---------- Navbar ---------- */
     header.nav { position: sticky; top: 0; z-index: 50; padding: 14px 0; }
@@ -155,8 +174,21 @@
     /* ---------- Hero ---------- */
     .hero { padding: 70px 0 40px; }
     .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--turq-600); padding: 7px 14px; border-radius: 999px; margin-bottom: 22px; background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.3); }
-    .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--turq-500); box-shadow: 0 0 10px var(--turq-400); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--font-head); font-size: 0.72rem; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase;
+      color: var(--turq-deep); padding: 8px 16px; border-radius: 999px; margin-bottom: 22px;
+      background: linear-gradient(155deg, rgba(255,255,255,0.75), rgba(255,255,255,0.45));
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 6px 18px rgba(13,148,136,0.14), inset 0 1px 0 rgba(255,255,255,0.85);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    /* Punto indicador (solo el del hero) con pulso */
+    .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--turq-500); position: relative; }
+    .eyebrow .dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--turq-500); animation: dotPulse 2s ease-out infinite; }
+    @keyframes dotPulse { 0% { box-shadow: 0 0 0 0 rgba(20,184,166,0.55); } 70%,100% { box-shadow: 0 0 0 8px rgba(20,184,166,0); } }
+    /* Punto decorativo para los eyebrows de sección (sin .dot propio) */
+    .section-head .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: linear-gradient(135deg, var(--turq-500), var(--cyan-500)); box-shadow: 0 0 8px rgba(20,184,166,0.6); }
     .hero h1 { font-family: var(--font-head); font-weight: 800; font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.05; letter-spacing: -1px; margin-bottom: 20px; color: var(--ink); }
     .hero h1 .accent { white-space: nowrap; background: linear-gradient(120deg, var(--turq-500), var(--cyan-500)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     .hero p.lead { font-size: 1.12rem; color: var(--ink-soft); max-width: 520px; margin-bottom: 32px; font-weight: 400; }
@@ -185,8 +217,10 @@
     .section-head p { color: var(--ink-soft); font-size: 1.05rem; }
 
     .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-    .benefit { padding: 28px 24px; transition: transform 0.25s, background 0.25s; }
-    .benefit:hover { transform: translateY(-6px); background: var(--glass-bg-strong); }
+    .benefit { padding: 28px 24px; transition: transform 0.3s cubic-bezier(.2,.7,.2,1), box-shadow 0.3s, border-color 0.3s; }
+    .benefit:hover { transform: translateY(-8px); border-color: rgba(20,184,166,0.55); box-shadow: 0 22px 46px rgba(13,148,136,0.24); }
+    .benefit:hover .icon { transform: scale(1.08) rotate(-3deg); }
+    .benefit .icon { transition: transform 0.3s cubic-bezier(.2,.7,.2,1); }
     .benefit .icon { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 18px; background: linear-gradient(135deg, var(--turq-400), var(--cyan-500)); box-shadow: 0 6px 16px rgba(20,184,166,0.28); }
     .benefit .icon svg { width: 28px; height: 28px; stroke: #fff; }
     .benefit h4 { font-family: var(--font-head); font-weight: 600; font-size: 1.12rem; margin-bottom: 8px; color: var(--ink); }
@@ -203,8 +237,10 @@
     .table-note { text-align: center; color: var(--ink-dim); font-size: 0.85rem; margin-top: 22px; }
 
     .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .trust-box { padding: 34px 28px; text-align: center; transition: transform 0.25s; }
-    .trust-box:hover { transform: translateY(-8px); }
+    .trust-box { padding: 34px 28px; text-align: center; transition: transform 0.3s cubic-bezier(.2,.7,.2,1), box-shadow 0.3s, border-color 0.3s; }
+    .trust-box:hover { transform: translateY(-10px); border-color: rgba(20,184,166,0.5); box-shadow: 0 24px 48px rgba(13,148,136,0.22); }
+    .trust-box:hover .t-icon { transform: scale(1.1); }
+    .trust-box .t-icon { transition: transform 0.3s cubic-bezier(.2,.7,.2,1); }
     .trust-box .t-icon { width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 20px; background: linear-gradient(135deg, rgba(45,212,191,0.22), rgba(6,182,212,0.14)); border: 1px solid rgba(20,184,166,0.3); }
     .trust-box .t-icon svg { width: 30px; height: 30px; stroke: var(--turq-600); }
     .trust-box h4 { font-family: var(--font-head); font-weight: 600; font-size: 1.2rem; margin-bottom: 10px; color: var(--ink); }
@@ -249,12 +285,16 @@
       background: linear-gradient(165deg, #f2fffc 0%, #e6fbf6 50%, #eafcf8 100%);
       transition: opacity 0.5s ease, visibility 0.5s ease; }
     .splash.hide { opacity: 0; visibility: hidden; }
+    /* Respaldo sin JS: el splash se oculta solo tras 3.5s */
+    .splash { animation: splashAuto 0s 3.5s forwards; }
+    @keyframes splashAuto { to { opacity: 0; visibility: hidden; } }
+    .hero-visual.reveal { transition-delay: .12s; }
     .splash-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; animation: splashIn 0.6s ease; }
     .splash-logo { width: 104px; height: 104px; object-fit: contain; animation: logoPulse 1.9s ease-in-out infinite; }
     .splash-logo.is-fallback { width: 88px; height: 88px; }
     .wordmark { font-family: var(--font-head); font-weight: 800; font-size: 2.2rem; letter-spacing: -0.5px; line-height: 1; }
     .wm-bio { color: #0d9488; }
-    .wm-fusion { color: #1e6fd8; }
+    .wm-fusion { color: #1a3aa8; }
     .splash-tag { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-dim); }
     @keyframes splashIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
     @keyframes logoPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
@@ -262,7 +302,7 @@
     /* Logo real en nav/footer + wordmark bicolor */
     .brand-logo { width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; }
     .brand .wm-bio { color: #0d9488; }
-    .brand .wm-fusion { color: #1e6fd8; }
+    .brand .wm-fusion { color: #1a3aa8; }
 
     /* ---------- Hero: visual del producto ---------- */
     .hero-visual { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 440px; }
@@ -861,11 +901,28 @@
       var form = document.getElementById('contactForm');
       if (form) form.addEventListener('submit', handleSubmit);
 
-      // Ocultar splash screen (al terminar de cargar, con mínimo visible; y fallback por si acaso)
+      // Scroll reveal: las clases .reveal se AÑADEN por JS, así que sin JS todo queda visible
+      var heroReveal = document.querySelectorAll('.hero-copy, .hero-visual');
+      heroReveal.forEach(function(el){ el.classList.add('reveal'); });
+      var revealEls = document.querySelectorAll('.section-head, .benefit, .trust-box, .table-glass, .contact-form, .contact-aside, .cta-band');
+      revealEls.forEach(function(el){ el.classList.add('reveal'); });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+        revealEls.forEach(function(el){ io.observe(el); });
+      } else {
+        revealEls.forEach(function(el){ el.classList.add('in'); });
+      }
+
+      // Ocultar splash + revelar el hero (con mínimo visible y fallback por si acaso)
       var splash = document.getElementById('splash');
-      function hideSplash(){ if (splash) splash.classList.add('hide'); }
-      window.addEventListener('load', function(){ setTimeout(hideSplash, 550); });
-      setTimeout(hideSplash, 2600);
+      function reveal(){
+        if (splash) splash.classList.add('hide');
+        heroReveal.forEach(function(el){ el.classList.add('in'); });
+      }
+      window.addEventListener('load', function(){ setTimeout(reveal, 550); });
+      setTimeout(reveal, 2600);
     })();
   </script>
 </body>

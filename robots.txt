@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Reemplaza el dominio por el tuyo cuando publiques el sitio.
-Sitemap: https://TU-DOMINIO.com/sitemap.xml
+Sitemap: https://biofusion.dgp-link.com/sitemap.xml
